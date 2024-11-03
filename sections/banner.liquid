@@ -1,0 +1,159 @@
+<link href="{{ 'banner.css'| asset_url}}" rel="stylesheet" type="text/css">
+<script src="{{'banner.js' | asset_url}}"></script>
+<div>
+  <div class="wrapper">
+    <div class="banner">
+      <div class="banner-wrapper">
+        <p class="logo">{{ section.settings.storeName }}</p>
+        <p>{{ section.settings.tagline }}</p>
+        <a class="button" href="{{ section.settings.button_link }}">
+          {{ section.settings['choose-gift'] }}
+          <svg
+            width="27"
+            height="12"
+            viewBox="0 0 27 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <div class="banner-wrapper-mobile">
+        <button class="mobile-menu-button" aria-label="Toggle menu">☰</button>
+        <p class="mobile-logo">{{ section.settings.storeName }}</p>
+      </div>
+    </div>
+
+    <div class="nav-items">
+      <p>{{ section.settings.tagline }}</p>
+      <a class="button" href="{{ section.settings.button_link }}">
+        {{ section.settings['choose-gift'] }}
+        <svg
+          width="27"
+          height="12"
+          viewBox="0 0 27 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z"
+            fill="currentColor"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <div class="Main-Image">
+      <!-- For Main Image -->
+      <img
+        src="https://cdn.shopify.com/s/files/1/0670/2881/1971/files/main-frame.png?v=1730394716"
+        alt="This is Main Frame Image"
+      >
+    </div>
+
+    <div class="second-container">
+      <div class="text-section">
+        <h1 id="Title-Heading">{{ section.settings['main-heading'] }}</h1>
+
+        <p id="description">
+          {{ section.settings.description }}
+          <span
+            id="sub-description"
+          >
+            Explore our currated selection and find the perfect gifts to delight your loved ones this holiday season</span
+          >
+        </p>
+
+        <div class="button-div">
+          <a class="button" id="shop-button">
+            {{- section.settings['shop-now'] }}
+            <svg
+              width="27"
+              height="12"
+              viewBox="0 0 27 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM26.5303 6.53033C26.8232 6.23743 26.8232 5.76256 26.5303 5.46967L21.7574 0.696697C21.4645 0.403804 20.9896 0.403804 20.6967 0.696697C20.4038 0.989591 20.4038 1.46446 20.6967 1.75736L24.9393 6L20.6967 10.2426C20.4038 10.5355 20.4038 11.0104 20.6967 11.3033C20.9896 11.5962 21.4645 11.5962 21.7574 11.3033L26.5303 6.53033ZM1 6.75L26 6.75L26 5.25L1 5.25L1 6.75Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="Second-Image">
+        <!-- for 2nd Image -->
+        <img
+          src="https://cdn.shopify.com/s/files/1/0670/2881/1971/files/second-frame.png?v=1730394716"
+          alt="This is Secondary Frame Image"
+        >
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <p id="bottom-text">{{ section.settings['bottom-text'] }}</p>
+      <p id="bottom-text-mobile">SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "storeName",
+      "label": "Store",
+      "default": "Tisso Vision"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tag Line",
+      "default": "Find the Ideal gift for your Loved Ones"
+    },
+    {
+      "type": "text",
+      "id": "choose-gift",
+      "label": "Button",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "text",
+      "id": "main-heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. "
+    },
+    {
+      "type": "text",
+      "id": "shop-now",
+      "label": "Button",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "text",
+      "id": "bottom-text",
+      "label": "Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL "
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner",
+      "category": "Banner"
+    }
+  ]
+}
+{% endschema %}
