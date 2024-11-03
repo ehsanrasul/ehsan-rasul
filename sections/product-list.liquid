@@ -1,0 +1,244 @@
+{% assign products = collections.featured.products %}
+<link href="{{ 'product-list.css' | asset_url }}" rel="stylesheet" type="text/css">
+<link href="{{ 'pop-up.css' | asset_url }}" rel="stylesheet" type="text/css">
+<script src="{{ 'pop-up.js' | asset_url }}"></script>
+
+<div class="container">
+  <div class="title">Tisso Vision in the wild</div>
+  <div class="grid-container">
+    {% for product in products %}
+      <div class="grid-item">
+        <div
+          style="
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+          "
+        >
+          <img
+            id="product"
+            src="{{ product.featured_image | image_url }}"
+            width="100%"
+            height="100%"
+            alt="Product 1"
+          >
+          <!-- Link to trigger the pop-up with product data -->
+          <span
+            class="popup-trigger"
+            data-product="{{ product | json | escape }}"
+            style="text-decoration: none; cursor: pointer;"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style="
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+              "
+            >
+              <g filter="url(#filter0_d_5_3060)">
+                <circle
+                  cx="11.8571"
+                  cy="8.85714"
+                  r="7.85714"
+                  fill="white"
+                  fill-opacity="0.9"
+                />
+                <path
+                  d="M12.1045 6.02985V12.0738"
+                  stroke="black"
+                  stroke-linecap="square"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9.08252 9.05182H15.1265"
+                  stroke="black"
+                  stroke-linecap="square"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <filter
+                  id="filter0_d_5_3060"
+                  x="0"
+                  y="0"
+                  width="23.7144"
+                  height="23.7143"
+                  filterUnits="userSpaceOnUse"
+                  color-interpolation-filters="sRGB"
+                >
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix
+                    in="SourceAlpha"
+                    type="matrix"
+                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                    result="hardAlpha"
+                  />
+                  <feOffset dy="3" />
+                  <feGaussianBlur stdDeviation="2" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix
+                    type="matrix"
+                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+                  />
+                  <feBlend
+                    mode="normal"
+                    in2="BackgroundImageFix"
+                    result="effect1_dropShadow_5_3060"
+                  />
+                  <feBlend
+                    mode="normal"
+                    in="SourceGraphic"
+                    in2="effect1_dropShadow_5_3060"
+                    result="shape"
+                  />
+                </filter>
+              </defs>
+            </svg>
+          </span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ---POP-UP---- -->
+<div class="popup-wrapper" style="display: none;">
+  <div class="pop-modal">
+    <div class="pop-modal-content">
+      <button class="close-button">&times;</button>
+
+      <div class="product-container">
+        <div class="product-image">
+          <img id="modal-product-image" src="" alt="Product Image">
+        </div>
+        <div class="product-description">
+          <h2 id="modal-product-title">Product Title</h2>
+          <p id="modal-product-price">980,00 $</p>
+          <p id="modal-product-description">
+            This is a detailed product description. You can add more details about your product here.
+          </p>
+        </div>
+      </div>
+
+      <div class="color-options">
+        <h3>Color:</h3>
+        <div class="radio-container">
+          <div class="radio-box">
+            <input type="radio" id="option1" name="color-choice">
+            <label for="option1">
+              Orange
+              <div
+                class="color-indicator"
+                style="background-color: #ff5733"
+              ></div>
+            </label>
+          </div>
+          <div class="radio-box">
+            <input type="radio" id="option2" name="color-choice">
+            <label for="option2">
+              Blue
+              <div
+                class="color-indicator"
+                style="background-color: #3498db"
+              ></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="size-select">
+        <h3>Select Size:</h3>
+        <div class="custom-select-container">
+          <div class="select-wrapper">
+            <select name="size" id="sizeSelect">
+              <option value="" selected disabled>Choose your size</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+              <option value="xlarge">X-Large</option>
+            </select>
+          </div>
+          <div class="select-arrow"></div>
+        </div>
+      </div>
+
+      <!-- add to cart button -->
+      <button class="add-to-cart-button">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<!-- Embedded JavaScript -->
+<script>
+  {% if request.design_mode %}
+    document.addEventListener('DOMContentLoaded', function () {
+      const popupTriggers = document.querySelectorAll('.popup-trigger');
+      const popup = document.querySelector('.popup-wrapper');
+      const closePopup = document.querySelector('.close-button');
+
+      console.log('Number of popup triggers found:', popupTriggers.length);
+
+      popupTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function () {
+          const product = JSON.parse(this.dataset.product);
+
+          // Update modal content using product object
+          document.getElementById('modal-product-image').src = product.featured_image;
+          document.getElementById('modal-product-title').textContent = product.title;
+          document.getElementById('modal-product-price').textContent = product.price;
+          document.getElementById('modal-product-description').textContent = product.description;
+
+          // Show the popup
+          popup.style.display = 'block';
+        });
+      });
+
+      closePopup.addEventListener('click', function () {
+        console.log('Popup Closed!');
+        popup.style.display = 'none';
+      });
+
+      // Close popup when clicking outside
+      popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+          popup.style.display = 'none';
+        }
+      });
+    });
+  {% endif %}
+</script>
+
+{% schema %}
+{
+  "name": "Product List Section",
+  "tag": "section",
+  "class": "product-list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Select a collection to display products from."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product List",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
