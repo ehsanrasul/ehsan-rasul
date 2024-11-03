@@ -1,3 +1,7 @@
+      //for selecting products, size, color
+      
+      
+      
       // Track if the select is open
       let isSelectOpen = false;
 
